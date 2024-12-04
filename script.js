@@ -48,3 +48,32 @@
      // Listen for scroll events
      window.addEventListener('scroll', animateOnScroll);
  });
+
+ 
+    // FAQ functionality
+    const faqButtons = document.querySelectorAll('.faq-button');
+    faqButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const faqItem = button.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = button.querySelector('.faq-icon');
+            
+            // Toggle the answer visibility
+            answer.classList.toggle('hidden');
+            
+            // Rotate the icon
+            icon.style.transform = answer.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            
+            // Close other FAQ items
+            faqButtons.forEach(otherButton => {
+                if (otherButton !== button) {
+                    const otherFaqItem = otherButton.parentElement;
+                    const otherAnswer = otherFaqItem.querySelector('.faq-answer');
+                    const otherIcon = otherButton.querySelector('.faq-icon');
+                    
+                    otherAnswer.classList.add('hidden');
+                    otherIcon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+    });
